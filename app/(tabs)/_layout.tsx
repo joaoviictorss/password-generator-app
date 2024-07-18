@@ -1,35 +1,37 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Tabs } from "expo-router";
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
+import { Ionicons } from "@expo/vector-icons";
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
+    <Tabs screenOptions={{ tabBarActiveTintColor: "#28A745" }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
+          title: "Home",
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, focused, size }) => {
+            if (focused) {
+              return <Ionicons name="home" size={size} color={color} />;
+            }
+            return <Ionicons name="home-outline" size={size} color={color} />;
+          },
+          headerShown: false,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="passwords"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
+          title: "Senhas",
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, focused, size }) => {
+            if (focused) {
+              return <Ionicons name="lock-closed" size={size} color={color} />;
+            }
+            return (
+              <Ionicons name="lock-closed-outline" size={size} color={color} />
+            );
+          },
+          headerShown: false,
         }}
       />
     </Tabs>
